@@ -1,11 +1,23 @@
+// declare remove_element as a module
+mod remove_element;
 
 fn main() {
-    println!("Hello, world!");
-    println!("The reverse of {0} is {1}", -123, reverse(-123));
-    println!("The reverse of {0} is {1}", 1534236469, reverse(1534236469));
+    if false {
+        println!("Hello, world!");
+        println!("The reverse of {0} is {1}", -123, reverse(-123));
+        println!("The reverse of {0} is {1}", 1534236469, reverse(1534236469));
+    }
+
+    if true {
+        let mut nums = vec![1, 1, 2, 3];
+        remove_element::remove_element(&mut nums, 1);
+        println!("values = {0:?}", nums);
+    }
 }
 
 pub fn reverse(mut x: i32) -> i32 {
+    /// Reverses an integer, e.g. 123 becomes 321 or -123 becomes -321
+    ///
     // example: let x = 32
 
     let mut is_neg: bool = false;
