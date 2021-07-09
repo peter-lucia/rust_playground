@@ -1,5 +1,6 @@
 // declare remove_element as a module
 mod remove_element;
+mod two_sum;
 
 fn main() {
     if false {
@@ -8,10 +9,16 @@ fn main() {
         println!("The reverse of {0} is {1}", 1534236469, reverse(1534236469));
     }
 
-    if true {
+    if false {
         let mut nums = vec![1, 1, 2, 3];
         remove_element::remove_element(&mut nums, 1);
         println!("values = {0:?}", nums);
+    }
+
+    if true {
+        let nums = vec![2, 7, 11, 15];
+        let result = two_sum::two_sum(nums, 9);
+        println!("Indices adding up to 9 = {0:?}", result);
     }
 }
 
