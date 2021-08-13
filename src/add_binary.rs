@@ -16,11 +16,11 @@ pub struct Solution {
 }
 
 impl Solution {
-    pub fn binary_string_to_i32(num: String) -> i32 {
+    fn binary_string_to_i32(num: String) -> i32 {
         return i32::from_str_radix(&*num, 2).unwrap();
     }
 
-    pub fn i32_to_binary_string(num: i32) -> String {
+    fn i32_to_binary_string(num: i32) -> String {
         return format!("{:b}", num);
     }
 
