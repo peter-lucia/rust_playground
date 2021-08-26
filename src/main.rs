@@ -3,10 +3,11 @@ mod remove_element;
 mod two_sum;
 mod add_binary;
 mod reverse_integer;
-use reverse_integer::Reverse;
+use reverse_integer::Reverse; // Reverse is the trait for the Solution struct
+mod letter_combinations;
 
 fn main() {
-    if true {
+    if false {
         let solution = reverse_integer::Solution{};
         println!("Hello, world!");
         println!("The reverse of {0} is {1}", -123, solution.reverse(-123));
@@ -28,7 +29,7 @@ fn main() {
         println!("Indices adding up to 9 = {0:?}", result);
     }
 
-    if true {
+    if false {
         let solution = add_binary::Solution{};
         assert_eq!(String::from("100"),
                    solution.add_binary(String::from("11"),
@@ -36,5 +37,22 @@ fn main() {
         assert_eq!(String::from("10101"),
                    solution.add_binary(String::from("1010"),
                                           String::from("1011")));
+    }
+    if true {
+        let solution = letter_combinations::Solution{
+            digits: String::from("ab"),
+            combinations: Vec::new(),
+        };
+        assert_eq!(vec!["ad".to_string(),
+                        "ae".into(),
+                        "af".into(),
+                        "bd".into(),
+                        "be".into(),
+                        "bf".into(),
+                        "cd".into(),
+                        "ce".into(),
+                        "cf".into()],
+            solution.letter_combinations("ab".to_string()))
+
     }
 }
