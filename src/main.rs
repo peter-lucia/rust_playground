@@ -39,10 +39,7 @@ fn main() {
                                           String::from("1011")));
     }
     if true {
-        let solution = letter_combinations::Solution{
-            digits: String::from("ab"),
-            combinations: Vec::new(),
-        };
+        let mut solution = letter_combinations::Solution::default();
         assert_eq!(vec!["ad".to_string(),
                         "ae".into(),
                         "af".into(),
@@ -52,7 +49,7 @@ fn main() {
                         "cd".into(),
                         "ce".into(),
                         "cf".into()],
-            solution.letter_combinations("ab".to_string()))
+            solution.letter_combinations("23".to_string()));
 
     }
 }
