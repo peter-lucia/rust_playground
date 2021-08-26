@@ -16,16 +16,16 @@ Output: ["a","b","c"]
  */
 use std::collections::HashMap;
 
-pub struct Solution {
+pub struct LetterCombinations {
     digits: String,
     combinations: Vec<String>,
     lookup: HashMap<i32, String>,
 }
 
 // See the python solution found here: https://leetcode.com/problems/letter-combinations-of-a-phone-number/solution/
-impl Solution {
-    pub fn default() -> Solution {
-        return Solution {
+impl LetterCombinations {
+    pub fn new() -> LetterCombinations {
+        return LetterCombinations {
             digits: "".to_string(),
             combinations: vec![],
             lookup: [

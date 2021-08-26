@@ -39,7 +39,7 @@ fn main() {
                                           String::from("1011")));
     }
     if true {
-        let mut solution = letter_combinations::Solution::default();
+        let mut solution = letter_combinations::LetterCombinations::new();
         assert_eq!(vec!["ad".to_string(),
                         "ae".into(),
                         "af".into(),
