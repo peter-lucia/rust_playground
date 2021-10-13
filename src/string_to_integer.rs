@@ -42,7 +42,7 @@ impl MyAtoi for Solution {
             return 0;
         }
 
-
+        // find the starting and ending point for the integer
         let mut _start = 0;
         let mut _found = false;
         let mut _end = trimmed.len() - 1;
@@ -61,6 +61,7 @@ impl MyAtoi for Solution {
         }
         let mut trimmed_2 = (&trimmed[_start..=_end]).to_string();
 
+        // take note if the leading digit preceding the integer is '-'
         let leading_digit = trimmed.chars()
             .nth(
                 cmp::max(_start as i32-1, 0) as usize)
@@ -69,12 +70,16 @@ impl MyAtoi for Solution {
         if leading_digit == '-' {
             is_neg = true;
         }
+
+        // the number base is 10, so calculate the final resultant number by looking at each
+        // digit in the ones, tens, hundreds, etc. place
         let size_of_remaining = trimmed_2.len();
         let mut result: i64 = 0;
         let mut power_of_ten = 0;
         for i in (0..size_of_remaining).rev() {
             let digit = trimmed_2.chars().nth(i).unwrap().to_digit(10).unwrap() as i64;
             result += (digit) * (10 as i64).pow(power_of_ten);
+            // if we exceed the i32 size, return the largest i32
             if result > 2147483647 {
                 result = 2147483648;
                 break;
