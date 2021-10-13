@@ -3,8 +3,12 @@ mod remove_element;
 mod two_sum;
 mod add_binary;
 mod reverse_integer;
-use reverse_integer::Reverse; // Reverse is the trait for the Solution struct
+use reverse_integer::Reverse;
+use crate::string_to_integer::MyAtoi;
+
+// Reverse is the trait for the Solution struct
 mod letter_combinations;
+mod string_to_integer;
 
 fn main() {
     if false {
@@ -38,7 +42,7 @@ fn main() {
                    solution.add_binary(String::from("1010"),
                                           String::from("1011")));
     }
-    if true {
+    if false {
         let mut solution = letter_combinations::LetterCombinations::new();
         assert_eq!(vec!["ad".to_string(),
                         "ae".into(),
@@ -50,6 +54,9 @@ fn main() {
                         "ce".into(),
                         "cf".into()],
             solution.letter_combinations("23".to_string()));
-
+    }
+    if true {
+        let solution = string_to_integer::Solution{};
+        assert_eq!(solution.my_atoi("  -42".to_string()), -42);
     }
 }

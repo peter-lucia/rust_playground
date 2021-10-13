@@ -33,9 +33,9 @@ impl Solution {
                     instance after the transformation.
 
          */
-        let mut num1 = Solution::binary_string_to_i32(a);
-        let mut num2 = Solution::binary_string_to_i32(b);
-        let mut total = num1 + num2;
+        let num1 = Solution::binary_string_to_i32(a);
+        let num2 = Solution::binary_string_to_i32(b);
+        let total = num1 + num2;
         println!("{0} + {1} = {2}", num1, num2, total);
         return Solution::i32_to_binary_string(total);
     }

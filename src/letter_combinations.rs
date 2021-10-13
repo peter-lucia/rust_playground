@@ -42,7 +42,7 @@ impl LetterCombinations {
         }
     }
 
-    fn convert_String_i32(&self, str: String) -> i32 {
+    fn convert_string_i32(&self, str: String) -> i32 {
         return str.parse::<i32>().unwrap();
     }
 
@@ -52,7 +52,7 @@ impl LetterCombinations {
             return;
         }
         let possible_letters: String =
-            self.lookup.get(&self.convert_String_i32(self.digits.chars()
+            self.lookup.get(&self.convert_string_i32(self.digits.chars()
                 .nth(index as usize).unwrap().to_string()))
                 .unwrap().to_string();
         // let possible_letters.unwrap().to_string();
