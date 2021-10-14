@@ -37,6 +37,7 @@ pub trait MyAtoi {
 impl MyAtoi for Solution {
     fn my_atoi(&self, s: String) -> i32 {
         let mut trimmed = s.trim().to_string();
+        trimmed = trimmed.trim_start_matches('0').to_string();
         let mut is_neg = false;
         if trimmed.len() == 0 {
             return 0;
@@ -63,6 +64,9 @@ impl MyAtoi for Solution {
                 _found = true;
             }
 
+            if _found && c.is_alphabetic() {
+                return 0;
+            }
             if _found && !c.is_numeric() {
                 _end = i-1;
                 break;
@@ -184,5 +188,17 @@ mod tests {
     fn test_my_atoi_10() {
         let solution = Solution{};
         assert_eq!(solution.my_atoi("  0000000000012345678".to_string()), 12345678)
+    }
+
+    #[test]
+    fn test_my_atoi_11() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("00000-42a1234".to_string()), 0);
+    }
+
+    #[test]
+    fn test_my_atoi_12() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("-000000000000001".to_string()), -1);
     }
 }
