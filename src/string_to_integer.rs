@@ -50,7 +50,7 @@ impl MyAtoi for Solution {
             let c: char = trimmed.chars().nth(i).unwrap();
             if i > 0 {
                 let pair: &str = &trimmed[i-1..=i];
-                if pair == "+-" || pair == "-+" {
+                if vec!["++", "--", "+-", "-+", "- ", "+ "].contains(&pair) {
                     return 0;
                 }
             }
@@ -86,13 +86,26 @@ impl MyAtoi for Solution {
         let size_of_remaining = trimmed_2.len();
         let mut result: i64 = 0;
         let mut power_of_ten = 0;
+        let max_return_value: i32 = 2147483647;
+        let min_return_value: i32 = -2147483648;
         for i in (0..size_of_remaining).rev() {
             let digit = trimmed_2.chars().nth(i).unwrap().to_digit(10).unwrap() as i64;
-            result += (digit) * (10 as i64).pow(power_of_ten);
+            let tens_multiplier = (10 as i64).pow(power_of_ten);
+            if tens_multiplier > max_return_value as i64 {
+                if is_neg {
+                    return min_return_value;
+                } else {
+                    return max_return_value;
+                }
+            }
+            result += digit * tens_multiplier;
             // if we exceed the i32 size, return the largest i32
-            if result > 2147483647 {
-                result = 2147483648;
-                break;
+            if result > max_return_value as i64 {
+                if is_neg {
+                    return min_return_value;
+                } else {
+                    return max_return_value;
+                }
             }
             power_of_ten += 1;
         }
@@ -150,5 +163,26 @@ mod tests {
     fn test_my_atoi_7() {
         let solution = Solution{};
         assert_eq!(solution.my_atoi("21474836460".to_string()), 2147483647)
+    }
+
+    #[test]
+    fn test_my_atoi_8() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("  +  413".to_string()), 0)
+    }
+
+    #[test]
+    fn test_my_atoi_9() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("100000000000000000000\
+        0000000000000000000000000000\
+        0000000000000000000000000000\
+        000000000000000000000000000522545459".to_string()), 2147483647)
+    }
+
+    #[test]
+    fn test_my_atoi_10() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("  0000000000012345678".to_string()), 12345678)
     }
 }
