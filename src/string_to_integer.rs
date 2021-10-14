@@ -48,8 +48,17 @@ impl MyAtoi for Solution {
         let mut _end = trimmed.len() - 1;
         for i in 0..trimmed.len() {
             let c: char = trimmed.chars().nth(i).unwrap();
+            if i > 0 {
+                let pair: &str = &trimmed[i-1..=i];
+                if pair == "+-" || pair == "-+" {
+                    return 0;
+                }
+            }
             if !_found && !c.is_numeric() {
                 _start += 1;
+                if !vec![' ', '+', '-'].contains(&c) {
+                    return 0;
+                }
             } else {
                 _found = true;
             }
@@ -59,6 +68,7 @@ impl MyAtoi for Solution {
                 break;
             }
         }
+
         let mut trimmed_2 = (&trimmed[_start..=_end]).to_string();
 
         // take note if the leading digit preceding the integer is '-'
@@ -102,6 +112,7 @@ mod tests {
     fn test_my_atoi_1() {
         let solution = Solution{};
         assert_eq!(solution.my_atoi("  -42".to_string()), -42);
+        assert_eq!(solution.my_atoi("   -42".to_string()), -42);
     }
 
     #[test]
@@ -113,12 +124,31 @@ mod tests {
     #[test]
     fn test_my_atoi_3() {
         let solution = Solution{};
-        assert_eq!(solution.my_atoi("words and 987".to_string()), 987);
+        // reading stops immediately because there is a non-digit first
+        assert_eq!(solution.my_atoi("words and 987".to_string()), 0);
     }
 
     #[test]
     fn test_my_atoi_4() {
         let solution = Solution{};
         assert_eq!(solution.my_atoi("-91283472332".to_string()), -2147483648);
+    }
+
+    #[test]
+    fn test_my_atoi_5() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("+-12".to_string()), 0)
+    }
+
+    #[test]
+    fn test_my_atoi_6() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("+1".to_string()), 1)
+    }
+
+    #[test]
+    fn test_my_atoi_7() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("21474836460".to_string()), 2147483647)
     }
 }
