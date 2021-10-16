@@ -36,6 +36,7 @@ pub trait MyAtoi {
 
 impl MyAtoi for Solution {
     fn my_atoi(&self, s: String) -> i32 {
+        /// This problem is not worth continuing...just have to hardcode a bunch of rules.
         let mut trimmed = s.trim().to_string();
         trimmed = trimmed.trim_start_matches('0').to_string();
         let mut is_neg = false;
@@ -47,6 +48,7 @@ impl MyAtoi for Solution {
         let mut _start = 0;
         let mut _found = false;
         let mut _end = trimmed.len() - 1;
+        let mut _leading_zeros = 0;
         for i in 0..trimmed.len() {
             let c: char = trimmed.chars().nth(i).unwrap();
             if i > 0 {
@@ -60,12 +62,14 @@ impl MyAtoi for Solution {
                 if !vec![' ', '+', '-'].contains(&c) {
                     return 0;
                 }
-            } else {
-                _found = true;
-            }
-
-            if _found && c.is_alphabetic() {
+            } else if !_found && c == '0' {
+                _leading_zeros += 1;
+                _start += 1
+            } else if !_found && _leading_zeros > 0 && !c.is_numeric() {
                 return 0;
+            }
+            else {
+                _found = true;
             }
             if _found && !c.is_numeric() {
                 _end = i-1;
@@ -78,7 +82,7 @@ impl MyAtoi for Solution {
         // take note if the leading digit preceding the integer is '-'
         let leading_digit = trimmed.chars()
             .nth(
-                cmp::max(_start as i32-1, 0) as usize)
+                cmp::max(_start as i32- _leading_zeros -1, 0) as usize)
             .unwrap();
 
         if leading_digit == '-' {
@@ -199,6 +203,12 @@ mod tests {
     #[test]
     fn test_my_atoi_12() {
         let solution = Solution{};
-        assert_eq!(solution.my_atoi("-000000000000001".to_string()), -1);
+        assert_eq!(solution.my_atoi("-001".to_string()), -1);
+    }
+
+    #[test]
+    fn test_my_atoi_13() {
+        let solution = Solution{};
+        assert_eq!(solution.my_atoi("  -0012a42".to_string()), -12);
     }
 }
