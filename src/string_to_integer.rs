@@ -35,8 +35,9 @@ pub trait MyAtoi {
 }
 
 impl MyAtoi for Solution {
+
+    /// This problem is not worth continuing...just have to hardcode a bunch of rules.
     fn my_atoi(&self, s: String) -> i32 {
-        /// This problem is not worth continuing...just have to hardcode a bunch of rules.
         let mut trimmed = s.trim().to_string();
         trimmed = trimmed.trim_start_matches('0').to_string();
         let mut is_neg = false;
@@ -77,7 +78,7 @@ impl MyAtoi for Solution {
             }
         }
 
-        let mut trimmed_2 = (&trimmed[_start..=_end]).to_string();
+        let trimmed_2 = (&trimmed[_start..=_end]).to_string();
 
         // take note if the leading digit preceding the integer is '-'
         let leading_digit = trimmed.chars()

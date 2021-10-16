@@ -9,6 +9,7 @@ use crate::string_to_integer::MyAtoi;
 // Reverse is the trait for the Solution struct
 mod letter_combinations;
 mod string_to_integer;
+mod get_concatenation;
 
 fn main() {
     if false {
