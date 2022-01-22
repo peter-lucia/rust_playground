@@ -30,7 +30,7 @@ impl Graph {
 
     pub fn bfs(&self, v_start: usize) -> Vec<usize> {
         // traverse the graph with breadth first search
-        // print the order of the traversal
+        // return the order of the traversal
         let mut visited = vec![false; self.graph.len()+1];
         let mut result = vec![];
 
