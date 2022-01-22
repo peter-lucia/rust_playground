@@ -11,6 +11,7 @@ mod letter_combinations;
 mod string_to_integer;
 mod get_concatenation;
 mod buy_sell_stock;
+mod bfs;
 
 fn main() {
     if false {
