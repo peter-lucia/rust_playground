@@ -20,6 +20,7 @@ impl Graph {
         }
     }
 
+    /// Add an edge to the graph stored as an adj list
     pub fn add_edge(&mut self, u: usize, v: usize) -> ()  {
         if !self.graph.contains_key(&u) {
             self.graph.insert(u, vec![v]);
@@ -28,9 +29,40 @@ impl Graph {
         }
     }
 
+    /// Driver function to run recursive dfs from the starting vertex
+    /// Returns a vector of the vertices encountered
+    /// during the dfs traversal
+    pub fn dfs_driver(&self, u: usize) -> Vec<usize> {
+
+        let visited: &mut Vec<bool>  = &mut vec![false; self.graph.len() + 1];
+        let result: &mut Vec<usize> = &mut vec![];
+
+        self.dfs(u, visited, result);
+        return (*result).clone();
+    }
+
+    /// Traverses the graph with depth first search
+    /// starting at the provided vertex, u.
+    /// Modifies the result in place since it's mutable
+    fn dfs(&self, u: usize, visited: &mut Vec<bool>, result: &mut Vec<usize>) -> () {
+
+        if visited[u] {
+            return;
+        }
+
+        visited[u] = true;
+        result.push(u);
+
+        for neighbor in &self.graph[&u] {
+            // use take to pass ownership to recursive call
+            self.dfs(*neighbor, visited, result);
+        }
+        return;
+    }
+
+    /// traverse the graph with breadth first search
+    /// return the order of the traversal
     pub fn bfs(&self, v_start: usize) -> Vec<usize> {
-        // traverse the graph with breadth first search
-        // return the order of the traversal
         let mut visited = vec![false; self.graph.len()+1];
         let mut result = vec![];
 
@@ -81,6 +113,16 @@ mod tests {
         graph.add_edge(1, 2);
         graph.add_edge(2, 3);
         let result = graph.bfs(0);
+        assert_eq!(result, vec![0,1,2,3])
+    }
+
+    #[test]
+    fn test_dfs() {
+        let mut graph = Graph::new(5);
+        graph.add_edge(0, 1);
+        graph.add_edge(1, 2);
+        graph.add_edge(2, 3);
+        let result = graph.dfs_driver(0);
         assert_eq!(result, vec![0,1,2,3])
     }
 }
