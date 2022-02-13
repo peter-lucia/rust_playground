@@ -12,6 +12,7 @@ mod string_to_integer;
 mod get_concatenation;
 mod buy_sell_stock;
 mod graph;
+mod subsets_78;
 
 fn main() {
     if false {
