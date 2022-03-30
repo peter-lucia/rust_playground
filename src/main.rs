@@ -13,6 +13,8 @@ mod get_concatenation;
 mod buy_sell_stock;
 mod graph;
 mod subsets_78;
+mod time_formatter;
+// mod maximum_depth_binary_tree_104;
 
 fn main() {
     if false {
@@ -59,7 +61,7 @@ fn main() {
                         "cf".into()],
             solution.letter_combinations("23".to_string()));
     }
-    if true {
+    if false {
         let solution = string_to_integer::Solution{};
         assert_eq!(solution.my_atoi("  -42".to_string()), -42);
     }
