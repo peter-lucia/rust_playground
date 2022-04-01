@@ -14,7 +14,7 @@ mod buy_sell_stock;
 mod graph;
 mod subsets_78;
 mod time_formatter;
-// mod maximum_depth_binary_tree_104;
+mod maximum_depth_binary_tree_104;
 
 fn main() {
     if false {
